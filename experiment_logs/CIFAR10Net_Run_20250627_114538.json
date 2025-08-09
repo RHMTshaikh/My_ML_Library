@@ -1,0 +1,343 @@
+{
+    "experiment_id": "CIFAR10Net_Run_20250627_114538",
+    "date_time_started": "2025-06-27T11:45:38.640532",
+    "description": "Baseline LeNet-like model on CIFAR-10 with default Adam parameters and added logging.",
+    "hardware": {
+        "device": "cpu",
+        "cpu_cores": 4
+    },
+    "software_env": {
+        "python_version": "3.12.2",
+        "pytorch_version": "2.7.1+cpu",
+        "torchvision_version": "0.22.1+cpu"
+    },
+    "hyperparameters": {
+        "batch_size": 64,
+        "learning_rate": 0.001,
+        "num_epochs": 5,
+        "optimizer_name": "Adam",
+        "optimizer_params": {
+            "lr": 0.001,
+            "betas": [
+                0.9,
+                0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0,
+            "amsgrad": false,
+            "maximize": false,
+            "foreach": null,
+            "capturable": false,
+            "differentiable": false,
+            "fused": null,
+            "decoupled_weight_decay": false
+        },
+        "loss_function_name": "CrossEntropyLoss"
+    },
+    "dataset": {
+        "name": "CIFAR-10",
+        "transformations": [
+            "ToTensor()",
+            "Normalize(mean=(0.4914, 0.4822, 0.4465), std=(0.2471, 0.2435, 0.2616))",
+            "RandomVerticalFlip(p=0.5)",
+            "RandomRotation(degrees=[-30.0, 30.0], interpolation=nearest, expand=False, fill=0)"
+        ],
+        "normalization_mean": [
+            [
+                0.4914,
+                0.4822,
+                0.4465
+            ]
+        ],
+        "normalization_std": [
+            [
+                0.2471,
+                0.2435,
+                0.2616
+            ]
+        ],
+        "train_samples": 50000,
+        "test_samples": 10000,
+        "num_train_batches": 782,
+        "num_test_batches": 157,
+        "class_distribution_train": {
+            "0": 5000,
+            "1": 5000,
+            "2": 5000,
+            "3": 5000,
+            "4": 5000,
+            "5": 5000,
+            "6": 5000,
+            "7": 5000,
+            "8": 5000,
+            "9": 5000
+        }
+    },
+    "model_architecture": {
+        "name": "CIFAR10Net",
+        "total_trainable_parameters": 3251018,
+        "layers": [
+            {
+                "type": "Conv2d",
+                "name": "conv1_1",
+                "input_shape": "[2, 3, 32, 32]",
+                "in_channels": 3,
+                "out_channels": 64,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(1, 1)",
+                "output_shape": "[2, 64, 32, 32]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn1_1",
+                "input_shape": "[2, 64, 32, 32]",
+                "output_shape": "[2, 64, 32, 32]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_1",
+                "activation": "ReLU",
+                "input_shape": "[2, 64, 32, 32]",
+                "output_shape": "[2, 64, 32, 32]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv1_2",
+                "input_shape": "[2, 64, 32, 32]",
+                "in_channels": 64,
+                "out_channels": 64,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(1, 1)",
+                "output_shape": "[2, 64, 32, 32]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn1_2",
+                "input_shape": "[2, 64, 32, 32]",
+                "output_shape": "[2, 64, 32, 32]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_2",
+                "activation": "ReLU",
+                "input_shape": "[2, 64, 32, 32]",
+                "output_shape": "[2, 64, 32, 32]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv2_1",
+                "input_shape": "[2, 64, 16, 16]",
+                "in_channels": 64,
+                "out_channels": 128,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(1, 1)",
+                "output_shape": "[2, 128, 16, 16]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn2_1",
+                "input_shape": "[2, 128, 16, 16]",
+                "output_shape": "[2, 128, 16, 16]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_3",
+                "activation": "ReLU",
+                "input_shape": "[2, 128, 16, 16]",
+                "output_shape": "[2, 128, 16, 16]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv2_2",
+                "input_shape": "[2, 128, 16, 16]",
+                "in_channels": 128,
+                "out_channels": 128,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(1, 1)",
+                "output_shape": "[2, 128, 16, 16]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn2_2",
+                "input_shape": "[2, 128, 16, 16]",
+                "output_shape": "[2, 128, 16, 16]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_4",
+                "activation": "ReLU",
+                "input_shape": "[2, 128, 16, 16]",
+                "output_shape": "[2, 128, 16, 16]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv3_1",
+                "input_shape": "[2, 128, 8, 8]",
+                "in_channels": 128,
+                "out_channels": 256,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(1, 1)",
+                "output_shape": "[2, 256, 8, 8]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn3_1",
+                "input_shape": "[2, 256, 8, 8]",
+                "output_shape": "[2, 256, 8, 8]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_5",
+                "activation": "ReLU",
+                "input_shape": "[2, 256, 8, 8]",
+                "output_shape": "[2, 256, 8, 8]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv3_2",
+                "input_shape": "[2, 256, 8, 8]",
+                "in_channels": 256,
+                "out_channels": 256,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(1, 1)",
+                "output_shape": "[2, 256, 8, 8]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn3_2",
+                "input_shape": "[2, 256, 8, 8]",
+                "output_shape": "[2, 256, 8, 8]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_6",
+                "activation": "ReLU",
+                "input_shape": "[2, 256, 8, 8]",
+                "output_shape": "[2, 256, 8, 8]"
+            },
+            {
+                "type": "Flatten",
+                "name": "flatten",
+                "input_shape": "[2, 256, 4, 4]",
+                "output_shape": "[2, 4096]"
+            },
+            {
+                "type": "Linear",
+                "name": "fc1",
+                "input_shape": "[2, 4096]",
+                "in_features": 4096,
+                "out_features": 512,
+                "output_shape": "[2, 512]"
+            },
+            {
+                "type": "BatchNorm1d",
+                "name": "bn_fc1",
+                "input_shape": "[2, 512]",
+                "output_shape": "[2, 512]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_7",
+                "activation": "ReLU",
+                "input_shape": "[2, 512]",
+                "output_shape": "[2, 512]"
+            },
+            {
+                "type": "Linear",
+                "name": "fc2",
+                "input_shape": "[2, 512]",
+                "in_features": 512,
+                "out_features": 10,
+                "output_shape": "[2, 10]"
+            }
+        ]
+    },
+    "training_results": {
+        "train_losses_per_epoch": "[1.7002066524742205, 1.4177149590628837, 1.2843345207783876, 1.1978389533889262, 1.1276752072222092]",
+        "test_losses_per_epoch": "[1.5044005372721678, 1.2349387893251553, 1.0977049264938208, 1.0406243417673051, 0.9771679742321088]",
+        "test_accuracies_per_epoch": "[44.71, 54.31, 60.870000000000005, 62.89, 64.7]",
+        "test_precisions_macro_per_epoch": "[0.4685001869772695, 0.5530545057226441, 0.6142050647559918, 0.6389888538000192, 0.6506588789481156]",
+        "test_recalls_macro_per_epoch": "[0.4471, 0.5431000000000001, 0.6087, 0.6289, 0.647]",
+        "test_f1_scores_macro_per_epoch": "[0.43985169333013163, 0.5342999042567638, 0.6065806227821536, 0.6276375758508433, 0.6443378146253884]",
+        "test_roc_auc_macro_per_epoch": "[None, None, None, None, None]",
+        "total_training_time_seconds": 4278.46518945694,
+        "avg_time_per_epoch_seconds": 855.6930378913879
+    },
+    "final_evaluation_metrics": {
+        "best_epoch_details": {
+            "epoch_number": 5,
+            "test_accuracy": 64.7,
+            "test_loss": 0.9771679742321088,
+            "precision_macro_avg": 0.6506588789481156,
+            "recall_macro_avg": 0.6443378146253884,
+            "f1_score_macro_avg": 0.6443378146253884,
+            "roc_auc_macro_avg": null,
+            "confusion_matrix_at_best_epoch": "[[640, 21, 36, 17, 15, 21, 9, 38, 161, 42], [13, 781, 1, 11, 3, 9, 9, 11, 31, 131], [91, 8, 418, 85, 129, 123, 62, 51, 20, 13], [16, 13, 57, 393, 51, 305, 66, 64, 23, 12], [14, 2, 64, 72, 613, 51, 51, 117, 11, 5], [10, 4, 30, 131, 31, 680, 12, 76, 9, 17], [4, 6, 36, 111, 77, 48, 687, 14, 8, 9], [9, 9, 11, 54, 60, 89, 8, 738, 8, 14], [56, 37, 15, 14, 12, 22, 10, 6, 801, 27], [21, 122, 4, 17, 5, 21, 15, 26, 50, 719]]"
+        },
+        "overall_accuracy_last_epoch": 64.36,
+        "confusion_matrix_last_epoch": "[[634, 32, 37, 24, 17, 15, 8, 40, 154, 39], [19, 776, 2, 11, 5, 14, 10, 8, 25, 130], [75, 7, 404, 106, 120, 121, 68, 64, 23, 12], [14, 12, 56, 385, 45, 316, 71, 55, 30, 16], [17, 4, 68, 72, 609, 47, 43, 124, 12, 4], [10, 3, 26, 120, 40, 672, 11, 81, 19, 18], [3, 6, 40, 108, 72, 44, 699, 10, 9, 9], [8, 10, 17, 58, 66, 87, 10, 722, 7, 15], [63, 37, 13, 13, 6, 22, 10, 8, 794, 34], [30, 108, 3, 19, 7, 15, 15, 21, 41, 741]]",
+        "precision_macro_avg_last_epoch": 0.646431198686839,
+        "recall_macro_avg_last_epoch": 0.6436,
+        "f1_score_macro_avg_last_epoch": 0.6407296604104025,
+        "roc_auc_macro_avg_last_epoch": null,
+        "per_class_metrics_last_epoch": {
+            "0": {
+                "precision": 0.7262313860252004,
+                "recall": 0.634,
+                "f1_score": 0.6769887880405766
+            },
+            "1": {
+                "precision": 0.7798994974874371,
+                "recall": 0.776,
+                "f1_score": 0.7779448621553885
+            },
+            "2": {
+                "precision": 0.6066066066066066,
+                "recall": 0.404,
+                "f1_score": 0.4849939975990396
+            },
+            "3": {
+                "precision": 0.4203056768558952,
+                "recall": 0.385,
+                "f1_score": 0.40187891440501045
+            },
+            "4": {
+                "precision": 0.6170212765957447,
+                "recall": 0.609,
+                "f1_score": 0.6129843985908404
+            },
+            "5": {
+                "precision": 0.49667405764966743,
+                "recall": 0.672,
+                "f1_score": 0.5711857203569911
+            },
+            "6": {
+                "precision": 0.7396825396825397,
+                "recall": 0.699,
+                "f1_score": 0.7187660668380462
+            },
+            "7": {
+                "precision": 0.6372462488967343,
+                "recall": 0.722,
+                "f1_score": 0.6769807782466011
+            },
+            "8": {
+                "precision": 0.7127468581687613,
+                "recall": 0.794,
+                "f1_score": 0.7511825922421949
+            },
+            "9": {
+                "precision": 0.7278978388998035,
+                "recall": 0.741,
+                "f1_score": 0.734390485629336
+            }
+        }
+    },
+    "notes_observations": "Initial run of LeNet-like model. Achieved good accuracy. Consider more epochs or data augmentation next."
+}

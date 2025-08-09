@@ -1,0 +1,271 @@
+{
+    "experiment_id": "LeNet_CIFAR_10_Run_20250627_095415",
+    "date_time_started": "2025-06-27T09:54:15.315025",
+    "description": "Baseline LeNet-like model on CIFAR-10 with default Adam parameters and added logging.",
+    "hardware": {
+        "device": "cpu",
+        "cpu_cores": 4
+    },
+    "software_env": {
+        "python_version": "3.12.2",
+        "pytorch_version": "2.7.1+cpu",
+        "torchvision_version": "0.22.1+cpu"
+    },
+    "hyperparameters": {
+        "batch_size": 64,
+        "learning_rate": 0.001,
+        "num_epochs": 5,
+        "optimizer_name": "Adam",
+        "optimizer_params": {
+            "lr": 0.001,
+            "betas": [
+                0.9,
+                0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0,
+            "amsgrad": false,
+            "maximize": false,
+            "foreach": null,
+            "capturable": false,
+            "differentiable": false,
+            "fused": null,
+            "decoupled_weight_decay": false
+        },
+        "loss_function_name": "CrossEntropyLoss"
+    },
+    "dataset": {
+        "name": "CIFAR-10",
+        "transformations": [
+            "ToTensor()",
+            "Normalize(mean=(0.4914, 0.4822, 0.4465), std=(0.2471, 0.2435, 0.2616))",
+            "RandomVerticalFlip(p=0.5)",
+            "RandomRotation(degrees=[-30.0, 30.0], interpolation=nearest, expand=False, fill=0)"
+        ],
+        "normalization_mean": [
+            [
+                0.4914,
+                0.4822,
+                0.4465
+            ]
+        ],
+        "normalization_std": [
+            [
+                0.2471,
+                0.2435,
+                0.2616
+            ]
+        ],
+        "train_samples": 50000,
+        "test_samples": 10000,
+        "num_train_batches": 782,
+        "num_test_batches": 157,
+        "class_distribution_train": {
+            "0": 5000,
+            "1": 5000,
+            "2": 5000,
+            "3": 5000,
+            "4": 5000,
+            "5": 5000,
+            "6": 5000,
+            "7": 5000,
+            "8": 5000,
+            "9": 5000
+        }
+    },
+    "model_architecture": {
+        "name": "MyNeuralNetwork",
+        "total_trainable_parameters": 5040234,
+        "layers": [
+            {
+                "type": "Conv2d",
+                "name": "conv1",
+                "input_shape": "[2, 3, 32, 32]",
+                "in_channels": 3,
+                "out_channels": 16,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(0, 0)",
+                "output_shape": "[2, 16, 30, 30]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn1",
+                "input_shape": "[2, 16, 30, 30]",
+                "output_shape": "[2, 16, 30, 30]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_1",
+                "activation": "ReLU",
+                "input_shape": "[2, 16, 30, 30]",
+                "output_shape": "[2, 16, 30, 30]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv2",
+                "input_shape": "[2, 16, 15, 15]",
+                "in_channels": 16,
+                "out_channels": 128,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(1, 1)",
+                "output_shape": "[2, 128, 15, 15]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn2",
+                "input_shape": "[2, 128, 15, 15]",
+                "output_shape": "[2, 128, 15, 15]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_2",
+                "activation": "ReLU",
+                "input_shape": "[2, 128, 15, 15]",
+                "output_shape": "[2, 128, 15, 15]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv3",
+                "input_shape": "[2, 128, 8, 8]",
+                "in_channels": 128,
+                "out_channels": 256,
+                "kernel_size": "(3, 3)",
+                "stride": "(1, 1)",
+                "padding": "(0, 0)",
+                "output_shape": "[2, 256, 6, 6]"
+            },
+            {
+                "type": "BatchNorm2d",
+                "name": "bn3",
+                "input_shape": "[2, 256, 6, 6]",
+                "output_shape": "[2, 256, 6, 6]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_3",
+                "activation": "ReLU",
+                "input_shape": "[2, 256, 6, 6]",
+                "output_shape": "[2, 256, 6, 6]"
+            },
+            {
+                "type": "Flatten",
+                "name": "flatten_op",
+                "input_shape": "[2, 256, 6, 6]",
+                "output_shape": "[2, 9216]"
+            },
+            {
+                "type": "Linear",
+                "name": "fc1",
+                "input_shape": "[2, 9216]",
+                "in_features": 9216,
+                "out_features": 512,
+                "output_shape": "[2, 512]"
+            },
+            {
+                "type": "BatchNorm1d",
+                "name": "bn4",
+                "input_shape": "[2, 512]",
+                "output_shape": "[2, 512]"
+            },
+            {
+                "type": "ReLU",
+                "name": "relu_4",
+                "activation": "ReLU",
+                "input_shape": "[2, 512]",
+                "output_shape": "[2, 512]"
+            },
+            {
+                "type": "Linear",
+                "name": "fc2",
+                "input_shape": "[2, 512]",
+                "in_features": 512,
+                "out_features": 10,
+                "output_shape": "[2, 10]"
+            }
+        ]
+    },
+    "training_results": {
+        "train_losses_per_epoch": "[1.4193902889938306, 1.1333329876518006, 1.0104504943351307, 0.9294893337637568, 0.8618991939765414]",
+        "test_losses_per_epoch": "[1.4591644524009364, 1.0825560127094294, 1.0545637383582487, 0.9681606178830384, 0.9197838234293992]",
+        "test_accuracies_per_epoch": "[48.65, 61.69, 62.78, 66.0, 67.51]",
+        "test_precisions_macro_per_epoch": "[0.5273034274991444, 0.6399762231428077, 0.6382004871905522, 0.6682029879193917, 0.6760838705620605]",
+        "test_recalls_macro_per_epoch": "[0.48650000000000004, 0.6169, 0.6277999999999999, 0.66, 0.6750999999999999]",
+        "test_f1_scores_macro_per_epoch": "[0.47601938359503604, 0.6216875200110543, 0.6214243052243958, 0.6595769892693416, 0.6722533923443452]",
+        "test_roc_auc_macro_per_epoch": "[None, None, None, None, None]",
+        "total_training_time_seconds": 868.5914478302002,
+        "avg_time_per_epoch_seconds": 173.71828956604003
+    },
+    "final_evaluation_metrics": {
+        "best_epoch_details": {
+            "epoch_number": 5,
+            "test_accuracy": 67.51,
+            "test_loss": 0.9197838234293992,
+            "precision_macro_avg": 0.6760838705620605,
+            "recall_macro_avg": 0.6722533923443452,
+            "f1_score_macro_avg": 0.6722533923443452,
+            "roc_auc_macro_avg": null,
+            "confusion_matrix_at_best_epoch": "[[739, 33, 43, 16, 9, 13, 5, 14, 100, 28], [28, 866, 0, 5, 1, 8, 1, 1, 33, 57], [89, 15, 521, 58, 98, 80, 72, 32, 22, 13], [29, 15, 55, 440, 50, 244, 77, 38, 26, 26], [22, 12, 68, 59, 611, 66, 80, 53, 19, 10], [15, 11, 32, 149, 34, 658, 32, 43, 14, 12], [7, 11, 25, 75, 34, 24, 774, 9, 32, 9], [29, 6, 23, 38, 64, 101, 15, 688, 10, 26], [96, 36, 19, 10, 3, 15, 4, 2, 794, 21], [56, 161, 7, 21, 3, 15, 7, 12, 58, 660]]"
+        },
+        "overall_accuracy_last_epoch": 67.9,
+        "confusion_matrix_last_epoch": "[[753, 28, 40, 14, 5, 12, 4, 11, 103, 30], [31, 858, 1, 8, 0, 5, 3, 4, 33, 57], [86, 10, 522, 71, 95, 83, 64, 29, 29, 11], [27, 14, 60, 449, 48, 231, 76, 33, 39, 23], [34, 10, 60, 54, 621, 71, 65, 62, 18, 5], [13, 9, 25, 147, 27, 663, 31, 54, 14, 17], [10, 9, 17, 70, 31, 30, 787, 7, 24, 15], [24, 10, 19, 62, 67, 86, 11, 695, 9, 17], [97, 43, 16, 13, 2, 17, 3, 3, 787, 19], [54, 182, 8, 17, 1, 17, 2, 11, 53, 655]]",
+        "precision_macro_avg_last_epoch": 0.6810337239388047,
+        "recall_macro_avg_last_epoch": 0.679,
+        "f1_score_macro_avg_last_epoch": 0.6764570634976844,
+        "roc_auc_macro_avg_last_epoch": null,
+        "per_class_metrics_last_epoch": {
+            "0": {
+                "precision": 0.66696191319752,
+                "recall": 0.753,
+                "f1_score": 0.7073743541568812
+            },
+            "1": {
+                "precision": 0.731457800511509,
+                "recall": 0.858,
+                "f1_score": 0.7896916705016107
+            },
+            "2": {
+                "precision": 0.6796875,
+                "recall": 0.522,
+                "f1_score": 0.5904977375565611
+            },
+            "3": {
+                "precision": 0.49613259668508286,
+                "recall": 0.449,
+                "f1_score": 0.4713910761154856
+            },
+            "4": {
+                "precision": 0.6923076923076923,
+                "recall": 0.621,
+                "f1_score": 0.6547179757511861
+            },
+            "5": {
+                "precision": 0.5456790123456791,
+                "recall": 0.663,
+                "f1_score": 0.5986455981941309
+            },
+            "6": {
+                "precision": 0.7523900573613767,
+                "recall": 0.787,
+                "f1_score": 0.7693059628543499
+            },
+            "7": {
+                "precision": 0.7645764576457645,
+                "recall": 0.695,
+                "f1_score": 0.7281299109481404
+            },
+            "8": {
+                "precision": 0.7096483318304779,
+                "recall": 0.787,
+                "f1_score": 0.7463252726410621
+            },
+            "9": {
+                "precision": 0.7714958775029447,
+                "recall": 0.655,
+                "f1_score": 0.7084910762574365
+            }
+        }
+    },
+    "notes_observations": "Initial run of LeNet-like model. Achieved good accuracy. Consider more epochs or data augmentation next."
+}

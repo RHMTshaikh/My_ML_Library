@@ -1,0 +1,230 @@
+{
+    "experiment_id": "LeNet_MNIST_Run_20250625_104544",
+    "date_time_started": "2025-06-25T10:45:44.535769",
+    "description": "Baseline LeNet-like model on MNIST with default Adam parameters and added logging.    With no normalisation of data.",
+    "hardware": {
+        "device": "cpu",
+        "cpu_cores": 4
+    },
+    "software_env": {
+        "python_version": "3.12.2",
+        "pytorch_version": "2.7.1+cpu",
+        "torchvision_version": "0.22.1+cpu"
+    },
+    "hyperparameters": {
+        "batch_size": 64,
+        "learning_rate": 0.001,
+        "num_epochs": 5,
+        "optimizer_name": "Adam",
+        "optimizer_params": {
+            "lr": 0.001,
+            "betas": [
+                0.9,
+                0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0,
+            "amsgrad": false,
+            "maximize": false,
+            "foreach": null,
+            "capturable": false,
+            "differentiable": false,
+            "fused": null,
+            "decoupled_weight_decay": false
+        },
+        "loss_function_name": "CrossEntropyLoss"
+    },
+    "dataset": {
+        "name": "MNIST",
+        "transformations": [
+            "ToTensor()"
+        ],
+        "train_samples": 60000,
+        "test_samples": 10000,
+        "num_train_batches": 938,
+        "num_test_batches": 157,
+        "class_distribution_train": {
+            "0": 5923,
+            "1": 6742,
+            "2": 5958,
+            "3": 6131,
+            "4": 5842,
+            "5": 5421,
+            "6": 5918,
+            "7": 6265,
+            "8": 5851,
+            "9": 5949
+        }
+    },
+    "model_architecture": {
+        "name": "LeNetLike",
+        "total_trainable_parameters": 23188,
+        "layers": [
+            {
+                "type": "Conv2d",
+                "name": "conv1",
+                "input_shape": "[1, 1, 28, 28]",
+                "in_channels": 1,
+                "out_channels": 3,
+                "kernel_size": "(5, 5)",
+                "stride": "(1, 1)",
+                "padding": "(0, 0)",
+                "output_shape": "[1, 3, 24, 24]"
+            },
+            {
+                "type": "Tanh",
+                "name": "tanh_1",
+                "activation": "Tanh",
+                "input_shape": "[1, 3, 24, 24]",
+                "output_shape": "[1, 3, 24, 24]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv2",
+                "input_shape": "[1, 3, 12, 12]",
+                "in_channels": 3,
+                "out_channels": 6,
+                "kernel_size": "(5, 5)",
+                "stride": "(1, 1)",
+                "padding": "(0, 0)",
+                "output_shape": "[1, 6, 8, 8]"
+            },
+            {
+                "type": "Tanh",
+                "name": "tanh_2",
+                "activation": "Tanh",
+                "input_shape": "[1, 6, 8, 8]",
+                "output_shape": "[1, 6, 8, 8]"
+            },
+            {
+                "type": "Conv2d",
+                "name": "conv3",
+                "input_shape": "[1, 6, 4, 4]",
+                "in_channels": 6,
+                "out_channels": 120,
+                "kernel_size": "(4, 4)",
+                "stride": "(1, 1)",
+                "padding": "(0, 0)",
+                "output_shape": "[1, 120, 1, 1]"
+            },
+            {
+                "type": "Tanh",
+                "name": "tanh_3",
+                "activation": "Tanh",
+                "input_shape": "[1, 120, 1, 1]",
+                "output_shape": "[1, 120, 1, 1]"
+            },
+            {
+                "type": "Flatten",
+                "name": "flatten_op",
+                "input_shape": "[1, 120, 1, 1]",
+                "output_shape": "[1, 120]"
+            },
+            {
+                "type": "Linear",
+                "name": "fc1",
+                "input_shape": "[1, 120]",
+                "in_features": 120,
+                "out_features": 84,
+                "output_shape": "[1, 84]"
+            },
+            {
+                "type": "Tanh",
+                "name": "tanh_4",
+                "activation": "Tanh",
+                "input_shape": "[1, 84]",
+                "output_shape": "[1, 84]"
+            },
+            {
+                "type": "Linear",
+                "name": "fc2",
+                "input_shape": "[1, 84]",
+                "in_features": 84,
+                "out_features": 10,
+                "output_shape": "[1, 10]"
+            }
+        ]
+    },
+    "training_results": {
+        "train_losses_per_epoch": "[0.40224206478976365, 0.14473438674389427, 0.09690151248139137, 0.07587225799799276, 0.06282849712565398]",
+        "test_losses_per_epoch": "[0.17055500465130824, 0.10199019517957168, 0.07473074043374271, 0.06158203284692162, 0.053280262525303136]",
+        "test_accuracies_per_epoch": "[94.64, 96.78, 97.6, 97.98, 98.37]",
+        "test_precisions_macro_per_epoch": "[0.9461371412371926, 0.9679704160800485, 0.9761503148755194, 0.9798028650441294, 0.983780664994131]",
+        "test_recalls_macro_per_epoch": "[0.9461805593697978, 0.967485333360159, 0.975898128615085, 0.9796942213271267, 0.9836094241472066]",
+        "test_f1_scores_macro_per_epoch": "[0.9459931415675819, 0.9676346539154512, 0.9759449682950418, 0.9797343082736368, 0.9836582596163946]",
+        "test_roc_auc_macro_per_epoch": "[None, None, None, None, None]",
+        "total_training_time_seconds": 77.89818501472473,
+        "avg_time_per_epoch_seconds": 15.579637002944946
+    },
+    "final_evaluation_metrics": {
+        "best_epoch_details": {
+            "epoch_number": 5,
+            "test_accuracy": 98.37,
+            "test_loss": 0.053280262525303136,
+            "precision_macro_avg": 0.983780664994131,
+            "recall_macro_avg": 0.9836582596163946,
+            "f1_score_macro_avg": 0.9836582596163946,
+            "roc_auc_macro_avg": null,
+            "confusion_matrix_at_best_epoch": "[[972, 0, 1, 0, 1, 0, 3, 1, 2, 0], [0, 1129, 1, 1, 1, 0, 2, 1, 0, 0], [2, 1, 1014, 2, 2, 0, 0, 7, 4, 0], [0, 0, 3, 992, 0, 4, 0, 6, 2, 3], [2, 0, 0, 0, 970, 0, 4, 2, 0, 4], [2, 0, 0, 8, 0, 878, 2, 1, 0, 1], [4, 2, 1, 0, 1, 1, 947, 0, 2, 0], [0, 5, 4, 2, 0, 0, 0, 1013, 1, 3], [9, 0, 2, 2, 2, 2, 0, 3, 953, 1], [3, 7, 0, 2, 16, 3, 0, 8, 1, 969]]"
+        },
+        "overall_accuracy_last_epoch": 98.37,
+        "confusion_matrix_last_epoch": "[[972, 0, 1, 0, 1, 0, 3, 1, 2, 0], [0, 1129, 1, 1, 1, 0, 2, 1, 0, 0], [2, 1, 1014, 2, 2, 0, 0, 7, 4, 0], [0, 0, 3, 992, 0, 4, 0, 6, 2, 3], [2, 0, 0, 0, 970, 0, 4, 2, 0, 4], [2, 0, 0, 8, 0, 878, 2, 1, 0, 1], [4, 2, 1, 0, 1, 1, 947, 0, 2, 0], [0, 5, 4, 2, 0, 0, 0, 1013, 1, 3], [9, 0, 2, 2, 2, 2, 0, 3, 953, 1], [3, 7, 0, 2, 16, 3, 0, 8, 1, 969]]",
+        "precision_macro_avg_last_epoch": 0.983780664994131,
+        "recall_macro_avg_last_epoch": 0.9836094241472066,
+        "f1_score_macro_avg_last_epoch": 0.9836582596163946,
+        "roc_auc_macro_avg_last_epoch": null,
+        "per_class_metrics_last_epoch": {
+            "0": {
+                "precision": 0.9778672032193159,
+                "recall": 0.9918367346938776,
+                "f1_score": 0.9848024316109423
+            },
+            "1": {
+                "precision": 0.9868881118881119,
+                "recall": 0.9947136563876652,
+                "f1_score": 0.9907854322071084
+            },
+            "2": {
+                "precision": 0.9883040935672515,
+                "recall": 0.9825581395348837,
+                "f1_score": 0.9854227405247813
+            },
+            "3": {
+                "precision": 0.9831516352824579,
+                "recall": 0.9821782178217822,
+                "f1_score": 0.9826646854878652
+            },
+            "4": {
+                "precision": 0.9768378650553877,
+                "recall": 0.9877800407331976,
+                "f1_score": 0.9822784810126582
+            },
+            "5": {
+                "precision": 0.9887387387387387,
+                "recall": 0.984304932735426,
+                "f1_score": 0.9865168539325843
+            },
+            "6": {
+                "precision": 0.988517745302714,
+                "recall": 0.988517745302714,
+                "f1_score": 0.988517745302714
+            },
+            "7": {
+                "precision": 0.972168905950096,
+                "recall": 0.9854085603112841,
+                "f1_score": 0.978743961352657
+            },
+            "8": {
+                "precision": 0.9875647668393782,
+                "recall": 0.9784394250513347,
+                "f1_score": 0.9829809179989686
+            },
+            "9": {
+                "precision": 0.9877675840978594,
+                "recall": 0.9603567888999008,
+                "f1_score": 0.9738693467336683
+            }
+        }
+    },
+    "notes_observations": "Initial run of LeNet-like model. Achieved good accuracy. Consider more epochs or data augmentation next."
+}
